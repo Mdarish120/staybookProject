@@ -10,30 +10,28 @@ const Description = ({ desc }) => {
     distance: "",
     time: "",
   });
-
+  const [fetch, setFetch] = useState({});
   const [isEdited1, setIsEdited1] = useState(false);
   const [isEdited2, setIsEdited2] = useState(false);
   const [isEdited3, setIsEdited3] = useState(false);
   const [isEdited4, setIsEdited4] = useState(false);
 
-  const [fetch, setFetch] = useState({});
-
   useEffect(() => {
     setData(...desc);
+    setFetch(...desc);
   }, [desc]);
 
   const handleChange = (e) => {
     setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+  const handleCancel = () => {
+    setData(fetch);
   };
 
   const handleSave = async () => {
     //await addDoc(collection(db, "desc"), data);
     setFetch(data);
     await updateDoc(doc(db, "desc", "Et68EEjvmUYXw5DrhODn"), data);
-  };
-
-  const handleCancel = () => {
-    setData(fetch);
   };
 
   const handleEit1 = () => {
